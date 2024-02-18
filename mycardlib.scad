@@ -1,7 +1,3 @@
-module bezel() {
-cylinder(0.1, 0.8, 0.8);
-}
-
 friction_fit = 0.32;
 //friction_fit = 2;
 
@@ -89,10 +85,7 @@ module uncut_cardbox(spec, add_friction_fit) {
 module oldcardlid(s, lipheight, lidheight, t, label) {
       difference() {
         difference() {
-            //minkowski() {
               cube(s+[0,0,lipheight+lidheight]);
-            //                bezel();
-            //}
             minkowski() {
                 cardbox(s,lipheight, lidheight, t);
                 cube(friction_fit); // Was 0.1, didn't fit, adjusted to 0.5
@@ -111,10 +104,7 @@ module cardlid(spec) {
       t = spec[THICKNESS];
       difference() {
         difference() {
-            //minkowski() {
               cube(s+[0,0,lipheight+lidheight]);
-            //                bezel();
-            //}
             //minkowski() {
                 cardbox(spec, add_friction_fit=true);  // This box needs to be slightly bigger for friction fit
             //    cube(friction_fit); // Was 0.1, didn't fit, adjusted to 0.5
@@ -145,6 +135,7 @@ module holedlid(spec) {
     }
 }
 
+// Pins
 module arrow(offset_height=0, column_height=3, r1=2, r2=0.5, height=5, column_r=2, cone_height=2){
     t = 0.5;
     s=2;
@@ -175,12 +166,6 @@ module lidartwithpins(spec) {
     spec[THICKNESS]+lid_margin+1, 0]) resize([mainhole_x-2, mainhole_y-2, 3]) children();
     
 }
-
-//spec = [80, 60, 10, 1, 3, 6, [], 18, [9, 9], [0,0]];
-
-//translate([0,0,18]) holedlid(spec);
-//lidartwithpins(spec);
-//cardbox(spec);
 
 module boxwithlid(size, lipheight, lidheight, thickness, label) {
     exterior_size = size+[2*thickness, 2*thickness,2*thickness];
@@ -240,6 +225,8 @@ module lidslab(spec) {
 translate([-1.5,0,spec[2]])
 cube([spec[0]+3, spec[1], 3.5]);
 }
+
+// This is to make the lid snug on when slid on
 module lidramp(spec) {
     //translate([4,89, 64.65])
     //[67,95,65, 2, 0, 7, [], 11, [9, 9], [0,0]]
@@ -279,9 +266,9 @@ module groovelid(spec) {
     //translate([89.7,11.5,pairedspec[1]-1]) rotate([-90,0,0]) linear_extrude(pairedspec[0]-20) circle(0.6);    
 }
 
-//---------------------------
-//  ----- The box itself ----
-//---------------------------
+//--------------------------------
+//----- The groove box itself ----
+//--------------------------------
 module groovebox(spec) {
     cardbox(spec);
 
@@ -292,7 +279,10 @@ module groovebox(spec) {
 }
 
 
-// For the grooves
+// Constants for the grooves
+// TODO: cleanup/refactor
+// Note, these may not work with all box specs and certainly
+// wo't work with wall thickness less than abou 2mm
 thickness = 1;
 grooved_extra_thickness = 1.2;
 // Width of the groove, slider is less by tolerance
@@ -307,24 +297,5 @@ example = [67,95,65, 2, 0, 7, [], 11, [9, 9], [0,0]]; // No lip
 //boxwlidspacer(example, false);
 //cardbox(example);
 //cardlid(example);
-
 //groovebox(example);
 //groovelid(example);
-
-//boxinterior([10,7,14], 1, 2, 1);
-//boxwithlid([10,7,15], 3.0,2, 0.5);
-//boxwithlid([78,52,26], 2,5, 1.5);
-//boxwithlid([110,78,16], 2,5, 1.5);
-//boxwithlid([98,52,26], 6,7, 3,"M");
-
-// Light Speed
-//boxwithlid([52,78.5,28], 5,2, 1,"M");
-//translate([-60,0,0])
-//cardlid([54,80.5,30], 5,2, 1,"M");
-
-
-// Pico
-//OLD cardbox([57.7+2,89.2+2,4+2], 4,6, 1);
-// THIS ONE WORKS cardbox([61, 91, 6], 4, 7, 1);
-//rotate([0,180,0]) 
-//cardlid([61,91,6], 4,7, 1);
