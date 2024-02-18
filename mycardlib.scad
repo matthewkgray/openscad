@@ -1,3 +1,19 @@
+/*
+   This is a work-in progress library for creating custom boxes for whatever, but
+   I use them for board game compoents.abs
+   
+   You create a spec array and most of the modules take that spec and make the component
+   for a box with that spec.
+   
+   There's three major varieties:
+     * Regular box with friction fit lid (cardbox and cardlid)
+     * Grooved box/lid (dovetail grooves and friction fit, modules groovebox & groovelid)
+          This one won't work if you specify any lip height.
+          TODO: Warn/fail if theres a lip on a groove box
+     * Funky box lid frame with snapfit pins to allow a relief surface on the box lid
+*/
+
+
 friction_fit = 0.32;
 //friction_fit = 2;
 
