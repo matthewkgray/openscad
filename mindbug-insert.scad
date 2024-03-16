@@ -1,13 +1,12 @@
-// Mindbug
+// Mindbug minimalist insert for Evolution or Eternity box
+// Holds all cards from original kickstarter, new expansions
+// and stretch goals in a single Evolution/Eternity box
 
-// 119mm wide, 168mm long
+// I print on Bambu P1S with 0.16 Optimal settings
+
 
 cube([166, 117, 0.36]);
 
-//166-92
-
-// Card is 88, so 92 with slack
-// 62 so 66 with slack
 
 cardw = 67;
 cardh = 93;
